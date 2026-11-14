@@ -1,51 +1,61 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./app.css";
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+import { useEffect, useState } from "react";
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
+import {
+  initializeDatabase,
+  createConversation,
+  getConversations,
+  type Conversation,
+} from "./lib/database";
+
+export default function App() {
+  const [conversations, setConversations] =
+    useState<Conversation[]>([]);
+
+  const [error, setError] = useState("");
+
+  async function refresh() {
+    const rows = await getConversations();
+    setConversations(rows);
+  }
+
+  useEffect(() => {
+    async function start() {
+      try {
+        await initializeDatabase();
+        await refresh();
+      } catch (err) {
+        setError(String(err));
+      }
+    }
+
+    start();
+  }, []);
+
+  async function addConversation() {
+    try {
+      await createConversation("Nouvelle conversation");
+      await refresh();
+    } catch (err) {
+      setError(String(err));
+    }
   }
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+    <main>
+      <h1>Local Agent</h1>
 
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+      <button onClick={addConversation}>
+        Créer une conversation
+      </button>
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
+      {error && <p role="alert">{error}</p>}
+
+      {conversations.map((conversation) => (
+        <p key={conversation.id}>
+          {conversation.id} — {conversation.title}
+        </p>
+      ))}
     </main>
   );
 }
-
-export default App;
