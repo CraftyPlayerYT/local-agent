@@ -1,4 +1,8 @@
+🌐 **Documentation languages**
 
+🇬🇧 [English](README.md) | 🇫🇷 [Français](README_FR.md)
+
+---
 # ⚡ Local Agent
 
 **The project's final name has not been chosen yet.** `local-agent` is its **temporary name**, currently used for the repository, source code, and development builds.
