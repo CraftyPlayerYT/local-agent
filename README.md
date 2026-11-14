@@ -1,230 +1,231 @@
+
 # ⚡ Local Agent
 
-**Le nom définitif du projet n'est pas encore choisi.** `local-agent` est son **nom provisoire**, utilisé pour le dépôt, le code et les versions de développement.
+**The project's final name has not been chosen yet.** `local-agent` is its **temporary name**, currently used for the repository, source code, and development builds.
 
 ### Your computer. Your models. Your rules.
 
-**Un futur agent IA de bureau, local-first, open source et pensé pour faire plus que discuter : comprendre, utiliser des outils et accomplir des tâches, avec l'utilisateur aux commandes.**
+**An upcoming local-first, open-source desktop AI agent designed to do more than chat: understand tasks, use tools, and get work done, while keeping the user in control.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
 [![Tauri 2](https://img.shields.io/badge/Tauri-2-24c8db?style=flat-square)](https://tauri.app/)
 [![Rust](https://img.shields.io/badge/Backend-Rust-f97316?style=flat-square)](https://www.rust-lang.org/)
 [![React + TypeScript](https://img.shields.io/badge/Frontend-React%20%2B%20TypeScript-149eca?style=flat-square)](https://react.dev/)
 [![Ollama planned](https://img.shields.io/badge/AI-Ollama%20planned-64748b?style=flat-square)](https://ollama.com/)
-[![Early development](https://img.shields.io/badge/Status-Early%20development-f59e0b?style=flat-square)](#-état-du-projet)
+[![Early development](https://img.shields.io/badge/Status-Early%20development-f59e0b?style=flat-square)](#-project-status)
 
-🌐 **Site web du projet : [local-agent-website.vercel.app](https://local-agent-website.vercel.app)**
+🌐 **Project website: [local-agent-website.vercel.app](https://local-agent-website.vercel.app)**
 
-**[La vision](#-pourquoi-ce-projet) · [Exemples](#-ce-quon-veut-pouvoir-faire) · [Skills](#-les-skills-au-cœur-de-lexpérience) · [Installation](#-développer-en-local) · [Contribuer](#-contribuer) · [Licence](#-licence-mit)**
+**[The vision](#-why-this-project) · [Examples](#-what-we-want-to-make-possible) · [Skills](#-skills-at-the-heart-of-the-experience) · [Getting started](#-developing-locally) · [Contributing](#-contributing) · [License](#-mit-license)**
 
 > [!IMPORTANT]
-> **Projet en cours de construction.** Le dépôt contient actuellement les fondations d'une application **Tauri 2 + React + TypeScript + Rust**, pas encore un agent IA complet. Les fonctions Ollama, terminal agentique, skills, sous-agents et contrôle du PC présentées ci-dessous constituent la **feuille de route**, et non une liste de fonctions déjà disponibles.
+> **This project is under active development.** The repository currently contains the foundations of a **Tauri 2 + React + TypeScript + Rust** application, **not yet a complete AI agent**. The Ollama integration, agent-operated terminal, skills, sub-agents, and PC control features described below are part of the **roadmap**, not a list of features already available.
 
 ---
 
-## 🧠 C'est quoi, ce projet ?
+## 🧠 What is this project?
 
-Local Agent (nom provisoire) vise à réunir, dans **une seule application desktop**, ce qu'on attend d'un assistant IA local vraiment utile :
+Local Agent (temporary name) aims to bring together, in **one desktop application**, everything you'd expect from a truly useful local AI assistant:
 
-- **Un modèle local**, notamment via [Ollama](https://ollama.com/), sans abonnement cloud obligatoire pour l'inférence.
-- **Des outils intégrés** pour travailler avec des fichiers, des dossiers, du code et un terminal.
-- **Des skills prédéfinis**, fournis dès l'installation pour guider le comportement de l'agent dans des tâches précises.
-- **Des tâches en plusieurs étapes** et, à terme, des sous-agents qui collaborent.
-- **Un contrôle clair des ressources** : choix des modèles selon le matériel, attention particulière aux GPU AMD, budgets de mémoire et surveillance.
-- **Une interface native soignée**, avec streaming, historique, progression, visualisation des changements et bouton d'arrêt.
+- **A local model**, especially through [Ollama](https://ollama.com/), with no mandatory cloud subscription for inference.
+- **Built-in tools** for working with files, folders, code, and a terminal.
+- **Predefined skills**, included out of the box to guide the agent through specific tasks.
+- **Multi-step tasks** and, eventually, collaborating sub-agents.
+- **Clear resource management**: model selection based on hardware, particular attention to AMD GPUs, memory budgets, and monitoring.
+- **A polished native desktop experience**, with streaming, history, progress indicators, change previews, and a Stop button.
 
-L'objectif n'est **pas** de créer une énième fenêtre de chat pour Ollama. C'est de construire un espace de travail où le modèle peut proposer un plan, demander les bons outils, analyser les résultats et poursuivre une tâche — **sans recevoir pour autant des permissions illimitées sur le PC**.
+The goal is **not** to build yet another chat window for Ollama. It's to create a workspace where a model can suggest a plan, request the right tools, analyze their results, and continue a task — **without being granted unrestricted access to the computer**.
 
-## 💡 Pourquoi ce projet ?
+## 💡 Why this project?
 
-J'ai lancé ce projet pour une raison simple : **je ne trouvais pas de logiciel qui réunisse exactement les fonctionnalités que je voulais, directement intégrées et prêtes à l'emploi**.
+I started this project for one simple reason: **I couldn't find a single application that brought together exactly the features I wanted, already integrated and ready to use**.
 
-On trouve d'excellents chats locaux, assistants de code, outils d'automatisation et plateformes d'agents. Mais, pour obtenir *mon* expérience idéale, il faut souvent combiner plusieurs logiciels, choisir des extensions, créer ses propres skills ou ajuster de nombreux réglages.
+There are excellent local AI chats, coding assistants, automation tools, and agent platforms. But getting *my* ideal experience often means combining several applications, choosing extensions, writing your own skills, or tweaking countless settings.
 
-Je veux essayer une autre approche :
+I want to try a different approach:
 
-> **Ne pas demander à l'utilisateur de transformer une IA en agent utile. Fournir, dès le départ, un agent avec des outils adaptés, des skills compréhensibles et des limites explicites.**
+> **Don't make users turn an AI into a useful agent themselves. Give them an agent with the right tools, understandable skills, and explicit boundaries from day one.**
 
-Ce n'est **pas** une affirmation selon laquelle aucun projet existant ne propose de tools ou de skills. Plusieurs le font déjà. Ce que je veux construire, c'est **ma propre combinaison** : locale, native, cohérente, prête à travailler, personnalisable et attentive aux contraintes matérielles.
+This is **not** a claim that existing projects lack tools or skills. Several already provide them. What I want to build is **my own combination**: local, native, consistent, ready to work, customizable, and mindful of hardware limitations.
 
-### 🔭 Des projets inspirants — et ce qu'ils montrent
+### 🔭 Inspiring projects — and what they show
 
-| Projet | Exemples de fonctionnalités existantes | Ce que Local Agent veut mettre au centre |
+| Project | Examples of existing features | What Local Agent aims to emphasize |
 |:--|:--|:--|
-| [Open WebUI](https://docs.openwebui.com/features/) | Chat multi-modèles, recherche web, outils, Open Terminal, skills | Une **expérience desktop native** avec des workflows et skills fournis et organisés dès le départ |
-| [AnythingLLM](https://docs.anythingllm.com/installation-desktop/overview) | Application desktop, documents, agents, skills | Un agent orienté **actions système, programmation et gestion des ressources** |
-| [Jan](https://docs.jan.ai/desktop/quickstart) | Modèles locaux, projets, assistants, agents, connecteurs MCP | Un parcours **outils + modèle + permissions** aussi simple que possible |
-| [Cline](https://github.com/cline/cline) | Modifications de code, commandes, diffs et checkpoints | Étendre l'approche agentique à **plusieurs tâches desktop**, pas seulement au code |
-| [Continue](https://docs.continue.dev/ide-extensions/agent/quick-start) | Agent de code, exploration et modification de projets | Une application autonome avec **skills maison et sélection de modèles locaux** |
+| [Open WebUI](https://docs.openwebui.com/features/) | Multi-model chat, web search, tools, Open Terminal, skills | A **native desktop experience** with organized, ready-to-use workflows and skills |
+| [AnythingLLM](https://docs.anythingllm.com/installation-desktop/overview) | Desktop app, documents, agents, skills | An agent focused on **system actions, coding, and resource management** |
+| [Jan](https://docs.jan.ai/desktop/quickstart) | Local models, projects, assistants, agents, MCP connectors | A **tools + model + permissions** setup that is as simple as possible |
+| [Cline](https://github.com/cline/cline) | Code changes, commands, diffs, and checkpoints | Bring an agentic approach to **more desktop tasks**, not just coding |
+| [Continue](https://docs.continue.dev/ide-extensions/agent/quick-start) | Coding agent, project exploration and editing | A standalone app with **custom-built skills and local model selection** |
 
-Ces références servent à comprendre l'écosystème, **pas à prétendre que leurs fonctionnalités sont absentes ou inférieures**. Local Agent est indépendant de ces projets.
+These references help explain the ecosystem, **not to suggest their features are missing or inferior**. Local Agent is independent of these projects.
 
 ---
 
-## ✨ Ce qu'on veut construire
+## ✨ What we want to build
 
-| Domaine | Fonctionnalités visées | Statut |
+| Area | Planned capabilities | Status |
 |:--|:--|:--|
-| 🧠 **IA locale** | Connexion à Ollama, modèles installés, sélection et paramètres | 🔜 Prévu |
-| ⚡ **Streaming** | Affichage progressif des réponses et des actions, bouton Stop | 🔜 Prévu |
-| 📂 **Fichiers** | Parcourir, lire, rechercher, comparer et proposer des modifications | 🔜 Prévu |
-| 💻 **Terminal** | Exécuter des tâches autorisées, suivre les sorties, annuler les processus | 🔜 Prévu |
-| 🧩 **Skills** | Procédures prêtes à l'emploi, personnalisables et versionnées | 🔜 Prévu |
-| 🔎 **Recherche web** | Plusieurs requêtes, sources consultées, synthèses et liens | 🔜 Prévu |
-| 🤝 **Sous-agents** | Décomposer les tâches, déléguer, collecter et vérifier les résultats | 🔜 Prévu |
-| 🖥️ **Interaction PC** | Actions sur des fenêtres et applications avec autorisation explicite | 🔭 À étudier |
-| 🎮 **AMD et autres GPU** | Détection de matériel, compatibilité testée et chemins de repli | 🔜 Prévu |
-| 📊 **VRAM** | Profils de modèles, budgets, marges, mesures et alertes | 🔭 À étudier |
-| 💾 **Historique local** | Conversations, sessions, événements et résultats d'outils via SQLite | 🔜 Prévu |
-| 🪄 **Application desktop** | Fenêtre native avec React, TypeScript, Rust et Tauri | ✅ Base existante |
+| 🧠 **Local AI** | Ollama connection, installed models, selection, and settings | 🔜 Planned |
+| ⚡ **Streaming** | Progressive display of responses and actions, Stop button | 🔜 Planned |
+| 📂 **Files** | Browse, read, search, compare, and suggest changes | 🔜 Planned |
+| 💻 **Terminal** | Run approved tasks, stream output, cancel processes | 🔜 Planned |
+| 🧩 **Skills** | Ready-to-use, customizable, version-controlled procedures | 🔜 Planned |
+| 🔎 **Web search** | Multiple queries, inspected sources, summaries, and links | 🔜 Planned |
+| 🤝 **Sub-agents** | Break down tasks, delegate, collect and verify results | 🔜 Planned |
+| 🖥️ **PC interaction** | Actions in windows and applications with explicit permission | 🔭 To explore |
+| 🎮 **AMD and other GPUs** | Hardware detection, tested compatibility, and fallback options | 🔜 Planned |
+| 📊 **VRAM** | Model profiles, budgets, safety margins, metrics, and alerts | 🔭 To explore |
+| 💾 **Local history** | Conversations, sessions, events, and tool results via SQLite | 🔜 Planned |
+| 🪄 **Desktop application** | Native desktop window using React, TypeScript, Rust, and Tauri | ✅ Foundation in place |
 
-**Ce qu'on ne promet pas :** « zéro bug », une compatibilité absolue avec tous les GPU AMD ou une limite de VRAM garantie à l'octet près. Ce sont des sujets qui nécessitent des tests réels, des pilotes compatibles, des mécanismes de repli et des mesures reproductibles.
+**What we're not promising:** “zero bugs,” universal compatibility with every AMD GPU, or VRAM limits guaranteed down to the last byte. Those goals require real-world testing, compatible drivers, fallback mechanisms, and reproducible measurements.
 
-## 🚀 Ce qu'on veut pouvoir faire
+## 🚀 What we want to make possible
 
-Les demandes suivantes sont **des scénarios cibles**, pas des démonstrations de fonctions déjà implémentées.
+The following requests are **target scenarios**, not demonstrations of features that have already been implemented.
 
-### 01 — Déboguer un projet
+### 01 — Debug a project
 
-> « Ouvre mon projet React, identifie pourquoi TypeScript ne compile pas, propose un correctif, puis lance les tests après mon accord. »
+> “Open my React project, find out why TypeScript won't compile, suggest a fix, and then run the tests after I approve.”
 
-**Outils envisagés :** lecture de fichiers, recherche dans le code, diff, terminal, vérification des erreurs.
+**Planned tools:** file reading, code search, diff, terminal, error checking.
 
-### 02 — Travailler avec des documents
+### 02 — Work with documents
 
-> « Parcours ce dossier, retrouve les notes liées à mon exposé et fais-moi un résumé avec les fichiers sources. »
+> “Look through this folder, find the notes related to my presentation, and summarize them with references to the source files.”
 
-**Outils envisagés :** sélection de dossier, indexation locale, extraction et recherche.
+**Planned tools:** folder selection, local indexing, extraction, and search.
 
-### 03 — Faire une recherche documentée
+### 03 — Research with sources
 
-> « Compare ces trois bibliothèques Rust en consultant leur documentation officielle. Cite les pages utilisées. »
+> “Compare these three Rust libraries using their official documentation. Cite the pages you used.”
 
-**Outils envisagés :** recherche web, consultation des pages, synthèse et citations. **Connexion Internet requise.**
+**Planned tools:** web search, page retrieval, summaries, and citations. **Internet connection required.**
 
-### 04 — Préparer un patch sans toucher au projet
+### 04 — Prepare a patch without touching the project
 
-> « Inspecte ce dépôt, repère les problèmes de gestion d'erreurs et montre-moi les changements que tu ferais. Ne les applique pas encore. »
+> “Inspect this repository, spot potential error-handling problems, and show me the changes you'd make. Don't apply them yet.”
 
-**Outils envisagés :** lecture seule, analyse de code, aperçu des modifications.
+**Planned tools:** read-only access, code analysis, change previews.
 
-### 05 — Organiser une tâche avec plusieurs agents
+### 05 — Coordinate a task with multiple agents
 
-> « Analyse le bug avec un sous-agent, fais proposer un correctif à un autre, puis compare les résultats avant toute modification. »
+> “Have one sub-agent investigate the bug, another propose a fix, then compare the results before making any changes.”
 
-**Outils envisagés :** orchestrateur, sous-agents, mémoire de tâches et validation.
+**Planned tools:** orchestrator, sub-agents, task memory, and approval flow.
 
-### 06 — Adapter le modèle au PC
+### 06 — Adapt the model to the computer
 
-> « Je veux coder tout en gardant suffisamment de VRAM pour mes autres applications. Quels modèles et réglages sont raisonnables sur cette machine ? »
+> “I want to code while leaving enough VRAM for my other applications. Which models and settings would make sense on this machine?”
 
-**Outils envisagés :** détection GPU, estimation de mémoire, recommandations et surveillance.
+**Planned tools:** GPU detection, memory estimation, recommendations, and monitoring.
 
-### 07 — Utiliser le PC avec contrôle humain
+### 07 — Use the PC with human oversight
 
-> « Ouvre les paramètres de l'application et montre-moi où modifier cette option. Demande-moi avant toute action qui change mes fichiers. »
+> “Open the application's settings and show me where to change this option. Ask me before doing anything that modifies my files.”
 
-**Outils envisagés :** automatisation d'interface *explicitement activée*, aperçu de l'action et arrêt immédiat.
+**Planned tools:** *explicitly enabled* UI automation, action previews, and an immediate stop mechanism.
 
-### 08 — Rendre les réponses cohérentes grâce aux skills
+### 08 — Make answers more consistent with skills
 
-> « Pour les recherches web, utilise toujours l'outil dédié, distingue les informations vérifiées des hypothèses et donne les liens des sources. »
+> “When researching on the web, always use the dedicated tool, separate verified information from assumptions, and provide source links.”
 
-**Outils envisagés :** chargement de skills, appels d'outils structurés, validation des réponses.
+**Planned tools:** skill loading, structured tool calls, response validation.
 
 ---
 
-## 🧩 Les skills au cœur de l'expérience
+## 🧩 Skills at the heart of the experience
 
-**L'idée :** une bibliothèque de compétences préparées pour éviter que l'utilisateur doive réécrire à chaque fois de longues instructions.
+**The idea:** a library of prepared capabilities so users don't have to rewrite lengthy instructions every time.
 
-Exemples de skills envisagés :
+Examples of planned skills:
 
-| Skill | Rôle |
+| Skill | Purpose |
 |:--|:--|
-| `web-search` | Rechercher plusieurs mots-clés et citer les URL réellement consultées |
-| `code-review` | Lire le code, identifier les risques et proposer des diffs |
-| `project-debugging` | Reproduire un bug, examiner les messages d'erreur, proposer un correctif |
-| `file-analysis` | Explorer des dossiers autorisés et synthétiser des documents |
-| `terminal-assistant` | Préparer des commandes, expliquer leurs effets et demander confirmation |
-| `dependency-check` | Vérifier les dépendances et signaler les changements à risque |
-| `test-runner` | Sélectionner et interpréter des tests sans masquer les échecs |
-| `task-planner` | Découper les travaux complexes en étapes vérifiables |
+| `web-search` | Search multiple queries and cite URLs actually visited |
+| `code-review` | Read code, identify risks, and propose diffs |
+| `project-debugging` | Reproduce a bug, inspect errors, and suggest a fix |
+| `file-analysis` | Explore authorized folders and summarize documents |
+| `terminal-assistant` | Prepare commands, explain their effects, and ask for confirmation |
+| `dependency-check` | Check dependencies and flag potentially risky changes |
+| `test-runner` | Select and interpret tests without hiding failures |
+| `task-planner` | Break complex work into verifiable steps |
 
-### Exemple : un futur skill de recherche web
+### Example: a future web-search skill
 
-L'exemple suivant illustre un fichier `skills/web-search/SKILL.md`. **L'outil `web_search` n'existe pas encore dans l'application.**
+The following illustrates a `skills/web-search/SKILL.md` file. **The `web_search` tool does not yet exist in the application.**
 
 ````markdown
 ---
 name: web-search
-description: Rechercher des informations récentes et citer les sources réellement consultées.
+description: Search for recent information and cite sources that were actually consulted.
 ---
 
-# Recherche web
+# Web search
 
-Utilise ce skill quand une question demande des informations récentes ou externes.
+Use this skill when a question requires recent or external information.
 
-1. Transforme la demande en plusieurs recherches ciblées.
-2. Utilise l'outil `web_search` avec une liste de requêtes.
-3. Lis les résultats et ouvre les sources pertinentes quand c'est nécessaire.
-4. Distingue faits, hypothèses et informations non vérifiées.
-5. Fournis une synthèse claire et les liens des sources utilisées.
-6. N'invente jamais un résultat ou une citation.
+1. Turn the request into several focused searches.
+2. Use the `web_search` tool with a list of queries.
+3. Read the results and open relevant sources when needed.
+4. Distinguish facts, assumptions, and unverified information.
+5. Provide a clear summary and links to the sources used.
+6. Never invent a result or citation.
 
-Exemple conceptuel d'appel :
+Conceptual example of a tool call:
 
-`web_search(["documentation officielle Ollama", "support GPU AMD Ollama"])`
+`web_search(["official Ollama documentation", "Ollama AMD GPU support"])`
 ````
 
-Le format envisagé s'inspire de la [spécification ouverte Agent Skills](https://github.com/agentskills/agentskills). **Un skill guide le modèle ; il ne constitue pas une autorisation système et ne garantit pas à lui seul le respect des consignes.** Les droits et validations seront gérés par le backend.
+The proposed format is inspired by the [open Agent Skills specification](https://github.com/agentskills/agentskills). **A skill guides the model; it does not grant system permissions or, on its own, guarantee that the model will follow instructions.** Permissions and validation will be enforced by the backend.
 
 ---
 
-## 🏗️ Architecture envisagée
+## 🏗️ Proposed architecture
 
 ```mermaid
 flowchart TD
-    U[Utilisateur] --> UI[Interface React + TypeScript]
-    UI <--> T[Tauri 2 / commandes et événements]
-    T <--> R[Backend Rust]
-    R <--> O[Ollama / moteur local]
-    R --> A[Orchestrateur d'agents]
-    A --> P[Permissions et confirmations]
-    P --> F[Outils: fichiers, terminal, web, PC]
-    A --> S[Skills et sous-agents]
-    A --> DB[(SQLite / historique local)]
-    R --> G[Détection CPU / RAM / GPU]
+    U[User] --> UI[React + TypeScript UI]
+    UI <--> T[Tauri 2 / commands and events]
+    T <--> R[Rust backend]
+    R <--> O[Ollama / local inference engine]
+    R --> A[Agent orchestrator]
+    A --> P[Permissions and confirmations]
+    P --> F[Tools: files, terminal, web, PC]
+    A --> S[Skills and sub-agents]
+    A --> DB[(SQLite / local history)]
+    R --> G[CPU / RAM / GPU detection]
 ```
 
-**Règle centrale :** l'IA **propose**, le backend **vérifie** et l'utilisateur **garde le contrôle**. Un texte généré par le modèle, par une page web ou par un fichier ne doit jamais pouvoir donner de nouvelles permissions à lui seul.
+**Core principle:** the AI **proposes**, the backend **verifies**, and the user **stays in control**. Text generated by the model or received from a web page or file must never be able to grant itself additional permissions.
 
-### Stack
+### Tech stack
 
-| Composant | Choix | Statut |
+| Component | Choice | Status |
 |:--|:--|:--|
-| Desktop | [Tauri 2](https://tauri.app/) | Base en place |
-| UI | [React](https://react.dev/), TypeScript, [Vite](https://vite.dev/) | Base en place |
-| Backend | [Rust](https://www.rust-lang.org/) | Base en place |
-| Moteur local | [Ollama](https://docs.ollama.com/api) | Intégration prévue |
-| Données | [SQLite](https://sqlite.org/) | Prévu |
-| Skills | Markdown + YAML | Prévu |
-| Outils extensibles | [MCP](https://modelcontextprotocol.io/) | Envisagé |
-| Moteur alternatif | [llama.cpp](https://github.com/ggml-org/llama.cpp) | Envisagé |
+| Desktop | [Tauri 2](https://tauri.app/) | Foundation in place |
+| UI | [React](https://react.dev/), TypeScript, [Vite](https://vite.dev/) | Foundation in place |
+| Backend | [Rust](https://www.rust-lang.org/) | Foundation in place |
+| Local inference | [Ollama](https://docs.ollama.com/api) | Integration planned |
+| Data | [SQLite](https://sqlite.org/) | Planned |
+| Skills | Markdown + YAML | Planned |
+| Extensible tools | [MCP](https://modelcontextprotocol.io/) | Under consideration |
+| Alternative engine | [llama.cpp](https://github.com/ggml-org/llama.cpp) | Under consideration |
 
-### Organisation de code proposée (non présente intégralement)
+### Proposed project structure (not fully implemented)
 
 ```text
 src/
-  components/         # Chat, outils, panneaux et permissions
-  features/           # Conversations, modèles, paramètres
-  lib/                # Appels des commandes Tauri
+  components/         # Chat, tools, panels, and permissions
+  features/           # Conversations, models, settings
+  lib/                # Calls to Tauri commands
 src-tauri/src/
-  agent/              # Orchestration des tâches
-  inference/          # Communication avec Ollama
-  storage/            # SQLite et migrations
-  tools/              # Exécution contrôlée des outils
-  system/             # Informations machine
+  agent/              # Task orchestration
+  inference/          # Ollama communication
+  storage/            # SQLite and migrations
+  tools/              # Controlled tool execution
+  system/             # System information
 skills/
   web-search/
   code-review/
@@ -233,47 +234,47 @@ skills/
 
 ---
 
-## 🚦 État du projet
+## 🚦 Project status
 
-**Version actuelle : `0.1.0` — fondations.** Le dépôt GitHub comporte encore une interface de démonstration Tauri et une commande Rust d'exemple. Il faut construire l'intégration Ollama, l'orchestrateur et les outils avant de pouvoir utiliser Local Agent comme assistant autonome.
+**Current version: `0.1.0` — foundations.** The GitHub repository still contains a Tauri demo interface and an example Rust command. Ollama integration, agent orchestration, and tools need to be built before Local Agent can function as an autonomous assistant.
 
 ### Roadmap
 
-- [x] Initialiser Tauri 2, React, TypeScript et Rust.
-- [x] Configurer le build desktop Windows.
-- [x] Publier le dépôt public et adopter la licence MIT.
-- [ ] Remplacer l'interface de démonstration par le véritable UI.
-- [ ] Détecter Ollama, lister les modèles et vérifier leur disponibilité.
-- [ ] Créer le chat avec streaming, sauvegarde et annulation.
-- [ ] Intégrer SQLite pour l'historique des conversations.
-- [ ] Ajouter la lecture de fichiers, la recherche et les diffs.
-- [ ] Ajouter des commandes de terminal soumises à des permissions.
-- [ ] Livrer une première bibliothèque de skills prédéfinis.
-- [ ] Ajouter la recherche web avec sources.
-- [ ] Développer la détection GPU et les recommandations de modèles.
-- [ ] Tester spécifiquement les configurations AMD.
-- [ ] Ajouter le suivi mémoire/VRAM et les budgets adaptatifs.
-- [ ] Expérimenter les sous-agents.
-- [ ] Étudier les interactions avec le PC et les contrôles d'arrêt.
-- [ ] Ajouter les tests automatiques et les releases publiques.
-- [ ] Choisir le **nom définitif** du projet.
+- [x] Initialize Tauri 2, React, TypeScript, and Rust.
+- [x] Configure Windows desktop builds.
+- [x] Publish the repository and adopt the MIT license.
+- [ ] Replace the demo interface with the actual UI.
+- [ ] Detect Ollama, list models, and check their availability.
+- [ ] Build chat with streaming, persistence, and cancellation.
+- [ ] Integrate SQLite for conversation history.
+- [ ] Add file reading, search, and diffs.
+- [ ] Add terminal commands controlled by permissions.
+- [ ] Ship the first library of predefined skills.
+- [ ] Add web search with sources.
+- [ ] Develop GPU detection and model recommendations.
+- [ ] Test AMD hardware configurations specifically.
+- [ ] Add memory/VRAM monitoring and adaptive budgets.
+- [ ] Experiment with sub-agents.
+- [ ] Explore PC interaction and emergency-stop controls.
+- [ ] Add automated tests and public releases.
+- [ ] Choose the project's **final name**.
 
 ---
 
-## 🛠️ Développer en local
+## 🛠️ Developing locally
 
 > [!NOTE]
-> Ces étapes permettent de lancer **la version actuelle du dépôt**, pas encore un agent Ollama opérationnel.
+> These instructions run **the repository's current version**, not yet a working Ollama agent.
 
-### Prérequis
+### Prerequisites
 
-- Windows (plateforme prioritaire pour le développement initial).
-- [Git](https://git-scm.com/), [Node.js](https://nodejs.org/) et [pnpm](https://pnpm.io/installation).
-- [Rust](https://www.rust-lang.org/tools/install) et Cargo.
-- Les [prérequis officiels Tauri sous Windows](https://v2.tauri.app/start/prerequisites/) : outils C++ adaptés et WebView2.
-- [Ollama](https://ollama.com/download) est **facultatif pour le moment**, car l'intégration n'est pas encore implémentée.
+- Windows (the initial development priority).
+- [Git](https://git-scm.com/), [Node.js](https://nodejs.org/), and [pnpm](https://pnpm.io/installation).
+- [Rust](https://www.rust-lang.org/tools/install) and Cargo.
+- The [official Tauri prerequisites for Windows](https://v2.tauri.app/start/prerequisites/): appropriate C++ build tools and WebView2.
+- [Ollama](https://ollama.com/download) is **optional for now**, because integration has not been implemented yet.
 
-### Cloner le dépôt
+### Clone the repository
 
 ```powershell
 git clone https://github.com/CraftyPlayerYT/local-agent.git
@@ -281,22 +282,22 @@ cd local-agent
 pnpm install
 ```
 
-### Lancer la version de développement
+### Run the development build
 
 ```powershell
 pnpm tauri dev
 ```
 
-### Construire l'application Windows
+### Build the Windows application
 
 ```powershell
 pnpm build
 pnpm tauri build
 ```
 
-Les builds Tauri se trouvent généralement dans `src-tauri/target/release/` et les installateurs dans `src-tauri/target/release/bundle/`.
+Tauri build outputs are typically found in `src-tauri/target/release/`, with installers in `src-tauri/target/release/bundle/`.
 
-### Tests de base avant une contribution
+### Basic checks before contributing
 
 ```powershell
 pnpm build
@@ -305,135 +306,135 @@ cargo check
 cargo test
 ```
 
-Ces commandes vérifient la compilation et exécutent les tests existants ; elles ne remplacent pas les tests fonctionnels, de sécurité et de compatibilité à venir.
+These commands check compilation and run existing tests; they are not a replacement for the functional, security, and compatibility tests that still need to be added.
 
 ---
 
-## 🤝 Contribuer
+## 🤝 Contributing
 
-**Le dépôt est public et accepte les issues, forks et pull requests.** Développeur Rust, fan d'interfaces, utilisateur AMD, auteur de skills ou débutant motivé : les retours concrets sont utiles.
+**The repository is public and accepts issues, forks, and pull requests.** Whether you're a Rust developer, UI enthusiast, AMD user, skill author, or motivated beginner, concrete feedback is welcome.
 
-### Comment proposer une modification
+### How to submit a change
 
-1. Consulte les [issues](https://github.com/CraftyPlayerYT/local-agent/issues), puis décris ton idée si elle demande un changement important.
-2. Crée un [fork](https://github.com/CraftyPlayerYT/local-agent/fork).
-3. Clone ton fork et crée une branche :
+1. Browse the [issues](https://github.com/CraftyPlayerYT/local-agent/issues), and describe your idea first if it involves a significant change.
+2. [Fork the repository](https://github.com/CraftyPlayerYT/local-agent/fork).
+3. Clone your fork and create a branch:
 
    ```powershell
-   git clone https://github.com/VOTRE-PSEUDO/local-agent.git
+   git clone https://github.com/YOUR-USERNAME/local-agent.git
    cd local-agent
-   git switch -c feat/nom-de-votre-idee
+   git switch -c feat/name-of-your-idea
    pnpm install
    ```
 
-4. Modifie le code, documente les changements et exécute les vérifications utiles.
-5. Publie ton travail :
+4. Update the code, document your changes, and run the relevant checks.
+5. Push your work:
 
    ```powershell
    git add .
-   git commit -m "feat: ajouter une fonctionnalité"
-   git push -u origin feat/nom-de-votre-idee
+   git commit -m "feat: add a new feature"
+   git push -u origin feat/name-of-your-idea
    ```
 
-6. Ouvre une [pull request](https://github.com/CraftyPlayerYT/local-agent/pulls) vers `main`. Explique le besoin, le comportement, les tests et les éventuelles permissions supplémentaires.
+6. Open a [pull request](https://github.com/CraftyPlayerYT/local-agent/pulls) targeting `main`. Explain the problem, expected behavior, tests performed, and any new permissions required.
 
-### Exemples de premières contributions
+### Examples of first contributions
 
-| Niveau | Idée | Pourquoi c'est utile |
+| Level | Idea | Why it helps |
 |:--|:--|:--|
-| 🟢 Débutant | Corriger un texte, une traduction ou un état vide | Rend l'application plus accessible |
-| 🟢 Débutant | Ajouter un test de composant React | Évite des régressions |
-| 🟡 Intermédiaire | Ajouter l'affichage des modèles Ollama | Première intégration IA concrète |
-| 🟡 Intermédiaire | Construire un panneau de diff | Rend les modifications vérifiables |
-| 🟡 Intermédiaire | Documenter un skill avec cas de test | Rend l'agent plus prévisible |
-| 🔴 Avancé | Construire une file de tâches Rust annulables | Base des agents et sous-agents |
-| 🔴 Avancé | Tester et mesurer la consommation VRAM AMD | Améliore la compatibilité réelle |
-| 🔴 Avancé | Concevoir un système de permissions par outil | Protège le poste utilisateur |
+| 🟢 Beginner | Fix wording, translations, or empty states | Makes the app more accessible |
+| 🟢 Beginner | Add a React component test | Helps prevent regressions |
+| 🟡 Intermediate | Display installed Ollama models | Delivers the first concrete AI integration |
+| 🟡 Intermediate | Build a diff preview panel | Makes changes easy to review |
+| 🟡 Intermediate | Document a skill with test cases | Makes the agent more predictable |
+| 🔴 Advanced | Build a queue of cancellable Rust tasks | Foundation for agents and sub-agents |
+| 🔴 Advanced | Test and measure AMD VRAM usage | Improves real-world compatibility |
+| 🔴 Advanced | Design per-tool permissions | Helps protect the user's computer |
 
-**Règles pour contribuer :** une PR par objectif cohérent ; aucun secret ni donnée personnelle dans les commits ; pas d'accès système étendu sans justification ; pas de modification automatique de fichiers sans flux de validation ; et des tests reproductibles pour tout changement sensible.
+**Contribution guidelines:** keep each PR focused; never commit secrets or personal data; justify any extended system access; don't automatically modify user files without an approval flow; and include reproducible tests for sensitive changes.
 
-### Signaler un bug
+### Reporting a bug
 
-Dans une [nouvelle issue](https://github.com/CraftyPlayerYT/local-agent/issues/new), indique si possible le système d'exploitation, la version de l'application, le modèle et le GPU (si concernés), les étapes pour reproduire, le résultat attendu, le résultat réel et les logs **sans informations sensibles**.
-
----
-
-## 🛡️ Sécurité et confidentialité
-
-Local ne veut pas dire automatiquement sûr. Un agent qui peut lire des fichiers ou lancer des commandes doit avoir des limites claires.
-
-**Principes de développement :**
-
-- **Lecture seule par défaut** pour l'exploration des projets.
-- **Permissions explicites et ciblées** pour écrire des fichiers ou utiliser des outils système.
-- **Diffs et confirmations** avant les changements sensibles.
-- **Arrêt des tâches** et gestion des processus lancés.
-- **Historique lisible** des actions et de leurs résultats.
-- **Données externes considérées comme non fiables**, y compris pages web et fichiers analysés.
-- **Aucun envoi de données vers un service externe sans indication claire**, y compris pour la recherche web.
-
-Ces protections sont **des objectifs à implémenter et à tester** : elles ne sont pas toutes actives aujourd'hui.
+When [opening an issue](https://github.com/CraftyPlayerYT/local-agent/issues/new), include the operating system, app version, AI model and GPU (if relevant), reproduction steps, expected result, actual result, and logs **with sensitive information removed** whenever possible.
 
 ---
 
-## 📜 Licence MIT
+## 🛡️ Security and privacy
 
-Le **code de ce dépôt** est distribué sous [licence MIT](LICENSE).
+Local does not automatically mean secure. An agent that can read files or execute commands needs clear boundaries.
 
-Tu peux notamment :
+**Development principles:**
 
-- ✅ utiliser le code, y compris commercialement ;
-- ✅ l'étudier, le modifier et le redistribuer ;
-- ✅ créer un fork ou une version dérivée ;
-- ✅ réutiliser des parties du code dans un projet propriétaire.
+- **Read-only by default** when exploring projects.
+- **Explicit, scoped permissions** for writing files or using system tools.
+- **Diffs and confirmations** before sensitive changes.
+- **Task cancellation** and proper management of launched processes.
+- **Readable action history** showing actions and results.
+- **Treat external content as untrusted**, including web pages and analyzed files.
+- **No data sent to external services without clear disclosure**, including web searches.
 
-Tu dois conserver **la notice de copyright et le texte de licence** dans les copies ou parties substantielles du logiciel. Le logiciel est fourni **sans garantie**, conformément à la licence.
+These safeguards are **goals to implement and test**: not all are active today.
 
-**Important :** la licence MIT n'oblige **pas** les projets dérivés à publier leur code source. Les modèles IA, polices, icônes, plugins et bibliothèques utilisés peuvent avoir **leurs propres licences**. La licence du dépôt ne remplace pas ces conditions.
+---
 
-Les contributions intégrées au projet sont destinées à être distribuées sous la licence du dépôt. Pour toute question sur des éléments tiers ou leurs droits, ouvre une issue avant de les ajouter.
+## 📜 MIT license
+
+The **source code in this repository** is distributed under the [MIT License](LICENSE).
+
+Among other things, you may:
+
+- ✅ use the code, including commercially;
+- ✅ study, modify, and redistribute it;
+- ✅ create a fork or derivative work;
+- ✅ reuse portions of the code in a proprietary project.
+
+You must retain **the copyright notice and license text** in copies or substantial portions of the software. The software is provided **without warranty**, as stated in the license.
+
+**Important:** the MIT License does **not** require derivative projects to publish their source code. AI models, fonts, icons, plugins, and libraries may be subject to **their own licenses**. The repository's MIT License does not override those terms.
+
+Contributions merged into this project are intended to be distributed under the repository's license. If you're unsure about third-party content or rights, open an issue before adding it.
 
 ---
 
 ## ❓ FAQ
 
-**Le projet s'appellera-t-il définitivement Local Agent ?**  
-Non. **Le nom final n'est pas choisi.** `local-agent` est le nom provisoire du dépôt et de l'application en développement.
+**Will the project always be called Local Agent?**  
+No. **The final name hasn't been chosen.** `local-agent` is the temporary name of the repository and the application under development.
 
-**Est-ce que l'application fonctionne déjà comme Codex ?**  
-Pas encore. Le socle desktop existe, mais la boucle agentique et les outils restent à développer.
+**Does the application already work like Codex?**  
+Not yet. The desktop foundation exists, but the agent loop and tools still need to be developed.
 
-**Est-ce que ça fonctionne sans Internet ?**  
-C'est l'objectif pour les conversations avec un modèle local déjà installé. La recherche web, les mises à jour et les téléchargements auront évidemment besoin d'Internet.
+**Will it work without an Internet connection?**  
+That's the goal for conversations using an already installed local model. Web searches, updates, and downloads will naturally require Internet access.
 
-**Est-ce compatible AMD ?**  
-La compatibilité AMD est une priorité. Elle devra être mesurée carte par carte, moteur par moteur. Voir la [documentation GPU d'Ollama](https://docs.ollama.com/gpu).
+**Is it AMD-compatible?**  
+AMD compatibility is a priority. It will need to be tested GPU by GPU and inference engine by inference engine. See the [Ollama GPU documentation](https://docs.ollama.com/gpu).
 
-**Peut-on limiter précisément la VRAM de chaque modèle ?**  
-L'objectif est de proposer des budgets et des marges adaptés. Une limite absolue, respectée dans tous les cas et sur tous les pilotes, n'est pas garantie à ce stade.
+**Can I set an exact VRAM limit for each model?**  
+The goal is to provide sensible budgets and safety margins. An absolute limit that is always respected on every driver is not guaranteed at this stage.
 
-**Les fonctionnalités et skills seront-ils intégrés d'office ?**  
-C'est l'ambition du projet : proposer un ensemble cohérent de skills et d'outils utiles dès l'installation, avec la possibilité de les personnaliser et de les désactiver.
+**Will tools and skills be included by default?**  
+That's the ambition: to ship a cohesive set of useful tools and skills from the start, with options to customize or disable them.
 
-**Puis-je utiliser le code dans mon propre projet ?**  
-Oui, selon les conditions de la [licence MIT](LICENSE). Vérifie séparément les licences des modèles et des dépendances.
+**Can I use the source code in my own project?**  
+Yes, under the terms of the [MIT License](LICENSE). Check model and dependency licenses separately.
 
 ---
 
-## 🔗 Ressources
+## 🔗 Resources
 
-- [Tauri — documentation officielle](https://v2.tauri.app/)
-- [Ollama — API officielle](https://docs.ollama.com/api)
-- [Ollama — compatibilité GPU](https://docs.ollama.com/gpu)
-- [Agent Skills — spécification ouverte](https://github.com/agentskills/agentskills)
-- [GitHub — écrire du Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+- [Tauri — official documentation](https://v2.tauri.app/)
+- [Ollama — official API](https://docs.ollama.com/api)
+- [Ollama — GPU compatibility](https://docs.ollama.com/gpu)
+- [Agent Skills — open specification](https://github.com/agentskills/agentskills)
+- [GitHub — Markdown formatting](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 ---
 
 ### 🌍 Built in the open. Made to run locally.
 
-**Le nom peut encore changer. L'idée, elle, est déjà là : une IA locale puissante, utile et contrôlable.**
+**The name may change. The idea is already here: powerful, useful, controllable local AI.**
 
-🌐 **[Site web](https://local-agent-website.vercel.app)** · ⭐ **[Découvrir le dépôt](https://github.com/CraftyPlayerYT/local-agent)** · 🐛 **[Signaler un bug](https://github.com/CraftyPlayerYT/local-agent/issues)** · 🛠️ **[Proposer du code](https://github.com/CraftyPlayerYT/local-agent/pulls)**
+🌐 **[Website](https://local-agent-website.vercel.app)** · ⭐ **[Explore the repository](https://github.com/CraftyPlayerYT/local-agent)** · 🐛 **[Report a bug](https://github.com/CraftyPlayerYT/local-agent/issues)** · 🛠️ **[Contribute code](https://github.com/CraftyPlayerYT/local-agent/pulls)**
 
-*Projet indépendant, non affilié à Ollama, Open WebUI, Jan, AnythingLLM, Cline ou Continue.*
+*An independent project, not affiliated with Ollama, Open WebUI, Jan, AnythingLLM, Cline, or Continue.*
